@@ -5,9 +5,11 @@ import { usePuterStore } from "~/lib/puter";
 import { convertPdfToImage } from "~/lib/pdf2img";
 import { generateUUID } from "~/lib/utils";
 import { prepareInstructions } from "~/constants";
+import { useNavigate } from "react-router";
 
 const Upload = () => {
   const { fs, ai, kv } = usePuterStore();
+  const navigate = useNavigate();                
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -46,6 +48,7 @@ const Upload = () => {
       setStatusText("Preparing data...");
 
       const uuid = generateUUID();
+
       const data: any = {
         id: uuid,
         resumePath: uploadedFile.path,
@@ -62,7 +65,10 @@ const Upload = () => {
 
       const feedback = await ai.feedback(
         uploadedFile.path,
-        prepareInstructions({ jobTitle, jobDescription })
+        prepareInstructions({
+          jobTitle,
+          jobDescription,
+        })
       );
 
       if (!feedback) return setStatusText("Error: Failed to analyze resume");
@@ -78,8 +84,10 @@ const Upload = () => {
 
       setStatusText("Analysis complete!");
 
-      // 🔥 SHOW THE FINAL OUTPUT IN CONSOLE (LIKE THE DEMO)
+      // 🔥 EXACT JSMastery style console output
       console.log("FINAL ANALYZED DATA:", data);
+
+      navigate(`/resume/${uuid}`);   // ✅ NOW WORKS
 
     } catch (err) {
       console.error(err);
@@ -95,7 +103,7 @@ const Upload = () => {
 
     const companyName = formData.get("company-name") as string;
     const jobTitle = formData.get("job-title") as string;
-    const jobDescription = formData.get("job-description") as string; // FIXED
+    const jobDescription = formData.get("job-description") as string;
 
     handleAnalyze({ companyName, jobTitle, jobDescription, file });
   };
