@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30952d05-b9e6-4471-9769-5e9d30091de7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/components/ATS.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/Details.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/components/Summary.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/resume.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/Accordion.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/ScoreBadge.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/ScoreGauge.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/upload.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/ATS.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/ATS.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Details.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Details.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Summary.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Summary.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/resume.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/resume.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +70,7 @@
       <workItem from="1763386607255" duration="40115000" />
       <workItem from="1763892828711" duration="4018000" />
       <workItem from="1763916081485" duration="2020000" />
-      <workItem from="1763963082886" duration="8937000" />
+      <workItem from="1763963082886" duration="16645000" />
     </task>
     <servers />
   </component>
@@ -80,5 +81,17 @@
     <option featureType="dependencySupport" implementationName="javascript:npm:react" />
     <option featureType="dependencySupport" implementationName="javascript:npm:tailwindcss" />
     <option featureType="dependencySupport" implementationName="javascript:npm:vite" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/components/Accordion.tsx</url>
+          <line>11</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

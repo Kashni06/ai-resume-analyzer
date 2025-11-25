@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { usePuterStore } from "~/lib/puter";
-import Summary  from "~/components/Summary";
+
+import Summary from "~/components/Summary";
 import ATS from "~/components/ATS";
 import Details from "~/components/Details";
 
@@ -20,13 +21,13 @@ const Resume = () => {
 
     const navigate = useNavigate();
 
-    // 🔐 Redirect if not authenticated
+    // Redirect if not authenticated
     useEffect(() => {
         if (!isLoading && !auth.isAuthenticated)
             navigate(`/auth?next=/resume/${id}`);
     }, [isLoading]);
 
-    // 📥 Load resume + image + feedback
+    // Load resume + feedback
     useEffect(() => {
         const loadResume = async () => {
             const resume = await kv.get(`resume:${id}`);
@@ -50,11 +51,7 @@ const Resume = () => {
             // Feedback JSON
             setFeedback(data.feedback);
 
-            console.log("Loaded Resume Data:", {
-                resumeUrl,
-                imageUrl,
-                feedback: data.feedback
-            });
+            console.log("Loaded Feedback:", data.feedback);
         };
 
         loadResume();
@@ -73,10 +70,10 @@ const Resume = () => {
 
             <div className="flex flex-row w-full max-lg:flex-col-reverse">
 
-                {/* LEFT - Resume Image */}
+                {/* Resume Image */}
                 <section className="feedback-section bg-[url('/images/bg-small.svg')] bg-cover h-[100vh] sticky top-0 items-center justify-center">
                     {imageUrl ? (
-                        <div className="animate-in fade-in duration-1000 gradient-border max-sm:m-0 h-[90%] max-wxl:h-fit w-fit">
+                        <div className="animate-in fade-in duration-1000 gradient-border h-[90%] w-fit">
                             <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
                                 <img
                                     src={imageUrl}
@@ -90,23 +87,28 @@ const Resume = () => {
                     )}
                 </section>
 
-                {/* RIGHT - Feedback */}
+                {/* Feedback */}
                 <section className="feedback-section">
                     <h2 className="text-4xl !text-black font-bold">Resume Review</h2>
 
                     {feedback ? (
                         <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
 
-                            {/* Summary → uses NEW JSON fields */}
-                            <Summary
-                                feedback={feedback.overallScore || 0}
-                                suggestions={feedback.action_items || []}
+                            {/* Pass full feedback */}
+                            <Summary feedback={feedback} />
+
+                            {/* FIXED: pass suggestions safely */}
+                            <ATS
+                                score={feedback.ats_compatibility || 0}
+                                suggestions={
+                                    feedback.detailed_feedback?.ats_optimization_tips
+                                        ?.map((tip: string) => ({
+                                            type: "improve",
+                                            tip
+                                        })) || []
+                                }
                             />
 
-                            {/* ATS Compatibility */}
-                            <ATS score={feedback.ats_compatibility || 0} />
-
-                            {/* Detailed Sections */}
                             <Details feedback={feedback.detailed_feedback || {}} />
 
                         </div>
