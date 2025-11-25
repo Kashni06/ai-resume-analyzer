@@ -18,7 +18,7 @@ export default function Home() {
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loadingResumes, setLoadingResumes] = useState(false);
 
-  // ✅ FIX: Wait until loading finishes
+  // ✅ FIXED → Wait for Puter to finish loading + then check auth
   useEffect(() => {
     if (!isLoading && !auth.isAuthenticated) {
       navigate("/auth?next=/");
@@ -38,8 +38,10 @@ export default function Home() {
       setLoadingResumes(false);
     };
 
-    loadResumes();
-  }, []);
+    if (!isLoading && auth.isAuthenticated) {
+      loadResumes();
+    }
+  }, [isLoading, auth.isAuthenticated]);
 
   return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
@@ -70,14 +72,16 @@ export default function Home() {
           </div>
         )}
 
-        {!loadingResumes && resumes?.length ===0 &&(
+        {!loadingResumes && resumes.length === 0 && (
           <div className="flex flex-col items-center justify-center mt-10 gap-4">
-            <Link to="/upload" className="primary-button w-fit text-xl font-semibold">
+            <Link
+              to="/upload"
+              className="primary-button w-fit text-xl font-semibold"
+            >
               Upload Resume
             </Link>
           </div>
         )}
-
       </section>
     </main>
   );
